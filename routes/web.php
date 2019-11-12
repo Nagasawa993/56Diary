@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// GET送信をしていて、かつ/だった場合
+// 
+Route::get('/', 'DiaryController@index');
