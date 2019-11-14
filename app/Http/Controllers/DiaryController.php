@@ -27,7 +27,7 @@ class DiaryController extends Controller
     {
         return view('diaries.create');
     }
-    // 新しい日記の保存をする画面
+    // 新しい日記の保存をする画面（create.blade.php）
     public function store(CreateDiary $request)
     {
         // Diaryモデルのインスタンスを作成
