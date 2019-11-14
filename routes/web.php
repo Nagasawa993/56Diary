@@ -18,4 +18,6 @@ Route::get('/diary/create', 'DiaryController@create')->name('diary.create');
 // Route::get('/diary/create', 'DiaryController@create')->('好きな名前');
 Route::post('/diary/store', 'DiaryController@store')->name('diary.store');
 
+Route::delete('/diary/{id}', 'DiaryController@store')->name('diary.destroy');
+
 //
