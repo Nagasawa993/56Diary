@@ -14,7 +14,7 @@
       <p>{{$diary->created_at}}</p>
 
       <form action="{{ route('diary.destroy',['id' => $diary->id])}}" method="POST" class="d-inline">
-        <!-- @csrf や @method('delete')はformタグのどこに入れても動く -->
+        <!-- @csrf や @method('delete')はformタグのどこに入れても動く  -->
         @csrf
         @method('delete')
         <button class="btn btn-danger">削除</button>
