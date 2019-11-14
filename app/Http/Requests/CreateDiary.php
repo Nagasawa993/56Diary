@@ -21,8 +21,18 @@ class CreateDiary extends FormRequest
     {
         return [
             // 'name属性' => 'してほしい入力チェック'
+            // required必須の入力であると設定
             'title' => 'required|max:30',
             'body' => 'required'
+        ];
+    }
+
+    //エラー文言を表示する際の、name属性と表示名の設定をする。
+    public function attributes()
+    {
+        return[
+            'title' => 'タイトル',
+            'body' => '本文'
         ];
     }
 }
