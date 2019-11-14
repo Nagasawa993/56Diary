@@ -47,7 +47,7 @@ class DiaryController extends Controller
     {
         //Diaryモデルを使用して、IDが一致する日記の取得
         $diary = Diary::find($id);
-        dd($id);
+        // dd($id);
 
         //取得した日記の削除
         $diary->delete();
