@@ -55,4 +55,39 @@ class DiaryController extends Controller
         //一覧画面にリダイレクト
         return redirect()->route('diary.index');
     }
+
+    //編集画面を表示する edit
+    // index.blade.phpで使われてる
+    public function edit(int $id)
+    {
+        //受け取ったIDを元に日記を取得
+        $diary = Diary::find($id);
+
+        //編集画面を返す。同時に取得した日記を渡す。
+        return view('diaries.edit',[
+            // キー => 値
+            'diary' => $diary
+        ]);
+    }
+
+    //日記を更新し、一覧画面にリダイレクトする updete
+    // - $id : 編集対象の日記のID
+    // - $request : リクエストの内容。ここに画面で入力された文字が格納されている。
+    public function update(int $id,Request $request)
+    {
+         //受け取ったIDを元に日記を取得・表示
+         $diary = Diary::find($id);
+
+             //  Diaryモデルを使って、DBに日記を保存
+             // $diary->DBのカラム名 = カラムに設定したい値
+             $diary->title = $request->title;
+             $diary->body = $request->body;
+
+         //DBに保存
+         $diary->save();
+
+         //一覧ページにリダイレクト
+         return redirect()->route('diary.index');
+
+    }
 }
