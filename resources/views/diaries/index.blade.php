@@ -13,11 +13,16 @@
     新規投稿
   </a>
 
+  {{-- @foreach は普通のループ処理と同じ --}}
   @foreach ($diaries as $diary)
     <div class="m-4 p-4 border border-primary">
       <p>{{$diary->title}}</p>
       <p>{{$diary->body}}</p>
       <p>{{$diary->created_at}}</p>
+
+      {{-- DiaryController.php に設定してある --}}
+      {{-- diary.edit は web.phpに設定してある --}}
+      <a href="{{ route('diary.edit', ['id' => $diary->id]) }}" class="btn btn-success">編集</a>
 
       <form action="{{ route('diary.destroy',['id' => $diary->id])}}" method="POST" class="d-inline">
         {{-- @csrf は外部からの攻撃防止用の専用コマンド --}}
