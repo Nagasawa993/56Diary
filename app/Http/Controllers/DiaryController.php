@@ -73,7 +73,7 @@ class DiaryController extends Controller
     //日記を更新し、一覧画面にリダイレクトする updete
     // - $id : 編集対象の日記のID
     // - $request : リクエストの内容。ここに画面で入力された文字が格納されている。
-    public function update(int $id,Request $request)
+    public function update(int $id,CreateDiary $request)
     {
          //受け取ったIDを元に日記を取得・表示
          $diary = Diary::find($id);
