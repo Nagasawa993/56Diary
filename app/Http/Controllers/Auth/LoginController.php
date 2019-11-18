@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+//ログイン時に関わるコントローラー
 class LoginController extends Controller
 {
     /*
@@ -25,7 +26,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //ログインしたときどの画面いくか
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.

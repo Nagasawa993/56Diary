@@ -27,6 +27,10 @@ class DiariesTableSeeder extends Seeder
                 'body' => 'ぽちぽち'
             ]
         ];
+
+        //IDが一番若いユーザーを取得
+        $user = DB::table('users')->first();
+
         // 配列をループで回して、テーブルにINSERTする
         foreach ($diaries as $diary) {
             DB::table('diaries')->insert([
@@ -34,6 +38,9 @@ class DiariesTableSeeder extends Seeder
                 'body' => $diary['body'],
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'user_id' => $user->id,
+
+                //Creabtn::now() 現在時刻
             ]);
         }
     }
