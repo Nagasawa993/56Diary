@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/diary/store', 'DiaryController@store')->name('diary.store');
     Route::delete('/diary/{id}', 'DiaryController@destroy')->name('diary.destroy');
     // {}は中身を置き換えてねの意味
-    Route::get('/diary/{id}/edit', 'DiaryController@edit')->name('diary.edit');
+    Route::get('/diary/{diary}/edit', 'DiaryController@edit')->name('diary.edit');
     Route::put('/diary/{id}/update', 'DiaryController@update')->name('diary.update');
     // deleteは削除、putは更新
 });
