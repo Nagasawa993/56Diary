@@ -20,17 +20,21 @@
       <p>{{$diary->body}}</p>
       <p>{{$diary->created_at}}</p>
 
-      {{-- DiaryController.php に設定してある --}}
-      {{-- diary.edit は web.phpに設定してある --}}
-      <a href="{{ route('diary.edit', ['id' => $diary->id]) }}" class="btn btn-success">編集</a>
+      {{-- Auth::check() : ログインしていたらtrue,他はfalse になりif文の中が実行されなくなる --}}
+      @if (Auth::check() && $diary->user_id == Auth::user()->id)
+        {{-- DiaryController.php に設定してある --}}
+        {{-- diary.edit は web.phpに設定してある --}}
+        <a href="{{ route('diary.edit', ['id' => $diary->id]) }}" class="btn btn-success">編集</a>
 
-      <form action="{{ route('diary.destroy',['id' => $diary->id])}}" method="POST" class="d-inline">
-        {{-- @csrf は外部からの攻撃防止用の専用コマンド --}}
-        {{-- @csrf や @method('delete')はformタグのどこに入れても動く --}}
-        @csrf
-        @method('delete')
-        <button class="btn btn-danger">削除</button>
-      </form>
+          <form action="{{ route('diary.destroy',['id' => $diary->id])}}" method="POST" class="d-inline">
+          {{-- @csrf は外部からの攻撃防止用の専用コマンド --}}
+          {{-- @csrf や @method('delete')はformタグのどこに入れても動く --}}
+            @csrf
+            @method('delete')
+            <button class="btn btn-danger">削除</button>
+          </form>
+      @endif
+
 
     </div>
   @endforeach
