@@ -27,4 +27,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/diary/{diary}/edit', 'DiaryController@edit')->name('diary.edit');
     Route::put('/diary/{id}/update', 'DiaryController@update')->name('diary.update');
     // deleteは削除、putは更新
+    
+    Route::post('/diary/{id}/like','DiaryController@like')
+    ->name('diary.like');
+    Route::post('/diary/{id}/dislike','DiaryController@dislike')
+    ->name('diary.dislike');
 });

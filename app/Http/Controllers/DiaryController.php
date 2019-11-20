@@ -114,4 +114,18 @@ class DiaryController extends Controller
          return redirect()->route('diary.index');
 
     }
+
+    //いいねが押されたときの処理
+    public function like()
+    {
+
+    }
+
+    //いいね解除（but）が押されたときの処理
+    public function dislike()
+    {
+
+    }
+
+
 }
