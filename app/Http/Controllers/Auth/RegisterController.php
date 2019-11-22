@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+//新規アカウント作成に関わるコントローラー
 class RegisterController extends Controller
 {
     /*
@@ -28,7 +29,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //新規アカウント作ったときどの画面いくか
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -52,6 +54,8 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            //2048キロバイトはキリがいい数字だから「max2048」
         ]);
     }
 
@@ -63,10 +67,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $imgPath =
+            $this->saveProfileImage($data['picture']);
+        // dd($imgPath);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'picture_path' => $imgPath,
         ]);
+    }
+
+    //プロフィール画像を保存するためのメソッド
+    //引数　$image:保存したい画像
+    private function saveProfileImage($image)
+    {
+        //storage/public/images/profilepicture フォルダに、
+        //絶対に被らない名前で写真を保存
+        //保存した後、そのファイルまでのパスを返してくれる
+        $imgPath = $image->store('images/profilePicture','public');
+
+        return 'storage/' .$imgPath;
     }
 }
