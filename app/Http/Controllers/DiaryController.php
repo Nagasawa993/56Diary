@@ -16,7 +16,7 @@ class DiaryController extends Controller
     {
         // diariesデーブルのデータを全件取得
         // 取得した結果を画面で確認
-        $diaries = Diary::all();
+        // $diaries = Diary::all();
 
         $diaries = Diary::with('likes')
             ->orderBy('id','desc')->get();
@@ -77,7 +77,7 @@ class DiaryController extends Controller
     // index.blade.phpで使われてる
     // public function edit(int $id)この書き方だとエラーが起こったときにプログラムコードのようなものが出てきて、一見壊れたようになってしまう。なので下のようにする。
     //このときweb.phpの中身と同じにする。
-    public function edit(diary $diary)
+    public function edit(Diary $diary)
     {
 
         //ログインユーザーが日記の投稿者かチェックする（他の人が内容を書き換えてしまうのを防ぐため）
@@ -104,6 +104,12 @@ class DiaryController extends Controller
     {
          //受け取ったIDを元に日記を取得・表示
          $diary = Diary::find($id);
+
+         // ログインユーザーが日記の投稿者かチェックする
+        if (Auth::user()->id != $diary->user_id) {
+            // 投稿者とログインユーザーが違う場合
+            abort(403);
+        }
 
              //  Diaryモデルを使って、DBに日記を保存
              // $diary->DBのカラム名 = カラムに設定したい値
