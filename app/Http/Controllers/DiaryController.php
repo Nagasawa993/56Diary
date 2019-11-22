@@ -144,7 +144,8 @@ class DiaryController extends Controller
         $diary->likes()->detach(Auth::user()->id);
 
         //通信が成功したことを返す
-        $
+        return response()
+            ->json(['success' => 'いいね解除完了！']);
 
 
     }
